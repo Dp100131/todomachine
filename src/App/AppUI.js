@@ -4,57 +4,44 @@ import { TodoSearch } from "../TodoSearch";
 import { TodoList } from "../TodoList";
 import { TodoItem } from "../TodoItem";
 import { CreateTodoButton } from "../CreateTodoButton";
+import { TodoContext } from "../TodoContext";
 
-function AppUI({
-    
-    loading,
-    error,
-    totalTodos,
-    completedTodos,
-    searchValue,
-    setSearchValue,
-    searchedTodos,
-    onComplete,
-    onDelete,
+function AppUI() {
 
-}) {
+    const {
+            error, 
+            loading, 
+            searchedTodos, 
+            onComplete, 
+            onDelete
+        } = React.useContext(TodoContext);
 
     return (
 
         <React.Fragment>
 
-            <TodoCounter
+            <TodoCounter />
 
-                totalTodos = {totalTodos}
-                completedTodos = {completedTodos}
-
-            />
-
-            <TodoSearch
-            
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-            
-            />
+            <TodoSearch />
 
             <TodoList>
 
-                {error && <p>Desesperate, hubo un error...</p>}
-                {loading && <p>Estamos cargando, no desesperes...</p>}
-                {(!loading && !searchedTodos.length) && <p>¡Crea tu primer todo!</p>}
-                
-                {searchedTodos.map(todo => (
+            {error && <p>Desesperate, hubo un error...</p>}
+            {loading && <p>Estamos cargando, no desesperes...</p>}
+            {(!loading && !searchedTodos.length) && <p>¡Crea tu primer todo!</p>}
 
-                <TodoItem 
+            {searchedTodos.map(todo => (
 
-                    key={todo.text} 
-                    text={todo.text} 
-                    completed={todo.completed}
-                    onComplete = {() => onComplete(todo.text)}
-                    onDelete = {() => onDelete(todo.text)}
-                />
+            <TodoItem 
 
-                ))}
+                key={todo.text} 
+                text={todo.text} 
+                completed={todo.completed}
+                onComplete = {() => onComplete(todo.text)}
+                onDelete = {() => onDelete(todo.text)}
+            />
+
+            ))}
 
             </TodoList>
 

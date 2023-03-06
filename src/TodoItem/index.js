@@ -1,5 +1,7 @@
 import React from 'react';
 import './TodoItem.css';
+import {AiOutlineCheck} from "react-icons/ai"
+import {BsFillTrash3Fill} from "react-icons/bs"
 
 function TodoItem(props) {
 
@@ -24,7 +26,7 @@ function TodoItem(props) {
         onClick = {props.onComplete}
 
       >
-        √
+        <AiOutlineCheck/>
       </span>
       <p className={`TodoItem-p ${props.completed && 'TodoItem-p--complete'}`}>
         {props.text}
@@ -36,7 +38,7 @@ function TodoItem(props) {
         onClick={props.onDelete}
 
       >
-        X
+        <BsFillTrash3Fill/>
       </span>
     </li>
   );
